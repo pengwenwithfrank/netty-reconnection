@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="jquery-3.5.1.min.js"></script>
+</head>
+<body>
+<input type="button" value="sent" id="send" onclick="s()">
+<input type="text" id="test-txt">
+<input type="text" id="responseText">
+</body>
+
+<script>
+
+if(!window.WebSocket){
+
+    window.WebSocket = window.MozWebSocket;
+}
+
+if(window.WebSocket){
+    socket = new WebSocket("ws://127.0.0.1:9999/websocket");
+
+    socket.onmessage = function(event){
+
+        var ta = document.getElementById('responseText');
+        ta.value = event.data+"\r\n";
+    };
+
+    socket.onopen = function(event){
+
+        var ta = document.getElementById('responseText');
+        ta.value = "打开WebSoket 服务正常，浏览器支持WebSoket!"+"\r\n";
+
+    };
+
+    socket.onclose = function(event){
+
+        var ta = document.getElementById('responseText');
+        ta.value = "";
+        ta.value = "WebSocket 关闭"+"\r\n";
+    };
+}else{
+    alert("您的浏览器不支持WebSocket协议！");
+}
+
+function send(message){
+    if(!window.WebSocket){return;}
+    if(socket.readyState == WebSocket.OPEN){
+        socket.send(message);
+    }else{
+        //alert("WebSocket 连接没有建立成功！");
+        console.log("WebSocket 连接没有建立成功！");
+    }
+
+}
+
+function s() {
+    var str  = document.getElementById('test-txt').value;
+    send(str);
+}
+
+
+
+</script>
+</html>
