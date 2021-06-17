@@ -2,7 +2,6 @@ package com.demo.netty.server;
 
 import com.demo.netty.MessageDecoder;
 import com.demo.netty.MessageEncoder;
-import com.demo.netty.client.NettyClientHandler;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.socket.SocketChannel;
