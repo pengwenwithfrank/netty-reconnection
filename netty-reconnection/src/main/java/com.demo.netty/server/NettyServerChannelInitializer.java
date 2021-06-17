@@ -19,7 +19,7 @@ public class NettyServerChannelInitializer extends ChannelInitializer<SocketChan
     protected void initChannel(SocketChannel ch) throws Exception {
         ChannelPipeline pipeline = ch.pipeline();
         /**
-         * 注册读空闲事件，5秒触发一次
+         * 注册读空闲事件，  5秒触发一次
          */
         pipeline.addLast(new IdleStateHandler(5,0,0, TimeUnit.SECONDS));
         /**
